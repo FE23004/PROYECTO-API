@@ -1,2 +1,3 @@
 pub mod platillo;
-pub mod comanda;
+pub mod comanda_models;
+pub mod categoria_menu;
