@@ -11,7 +11,17 @@ pub async fn obtener_categorias(State(pool): State<PgPool>) -> Json<Vec<Categori
         Err(_) => Json(vec![]),
     }
 }
-
+ 
+pub async fn obtener_categoria_por_id(
+    State(pool): State<PgPool>,
+    Path(id_categoria): Path<i32>,
+) -> Json<Option<CategoriaMenu>> {
+    let repo = CategoriaRepository::new(pool);
+    match repo.obtener_categoria_por_id(id_categoria).await {
+        Ok(categoria) => Json(Some(categoria)),
+        Err(_) => Json(None),
+    }
+}
 pub async fn crear_categoria(
     State(pool): State<PgPool>,
     Json(nueva_categoria): Json<NuevaCategoria>,

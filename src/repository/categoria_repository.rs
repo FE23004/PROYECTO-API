@@ -56,4 +56,13 @@ impl CategoriaRepository {
         .fetch_one(&self.pool)
         .await
     }
+    
+    pub async fn obtener_categoria_por_id(&self, id: i32) -> Result<CategoriaMenu, sqlx::Error> {
+    sqlx::query_as::<_, CategoriaMenu>(
+        "SELECT id_categoria, nombre_categoria FROM Categorias_Menu WHERE id_categoria = $1"
+    )
+    .bind(id)
+    .fetch_one(&self.pool)
+    .await
+}
 }
