@@ -113,9 +113,9 @@ async fn eliminar(
 /// Registra todas las rutas de mesas en el router
 pub fn mesa_router(pool: PgPool) -> Router {
     Router::new()
-        .route("/mesas", get(listar).post(crear))
+        .route("/api/mesas", get(listar).post(crear))
         .route(
-            "/mesas/{id}",
+            "/api/mesas/{id}",
             get(obtener)
                 .put(actualizar)
                 .delete(eliminar),

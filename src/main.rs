@@ -6,8 +6,12 @@ mod config;
 mod repository;
 
 //cambiar por los controllers que tengas
-use controller::pais_controller::pais_router;
-use controller::persona_controller::persona_router;
+use controller::platillo_controller::platillo_router;
+use controller::categoria_menu_controller::categoria_router;
+use controller::comanda_controller::comanda_router;
+use controller::mesa_controller::mesa_router;
+use controller::detalle_comanda_controller::detalle_comanda_router;
+
 
 use config::config::crear_pool;
 
@@ -30,9 +34,10 @@ async fn main() {
 }
 
 
-
 fn unificar_routers(pool: sqlx::PgPool) -> axum::Router {
-    let mut router1 = pais_router(pool.clone());
-    let router2 = persona_router(pool.clone());
-    router1.merge(router2)
+    platillo_router(pool.clone())
+        .merge(categoria_router(pool.clone()))
+        .merge(comanda_router(pool.clone()))
+        .merge(mesa_router(pool.clone()))
+        .merge(detalle_comanda_router(pool)) 
 }
