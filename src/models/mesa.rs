@@ -23,3 +23,12 @@ pub struct NuevaMesa {
     pub capacidad: Option<i32>,
     pub ubicacion: Option<String>,
 }
+
+/// Datos para ACTUALIZAR una mesa — todos los campos son opcionales.
+/// Solo se actualizan los campos que el cliente envíe en el JSON.
+#[derive(Debug, Serialize, Deserialize)]
+pub struct ActualizarMesa {
+    pub numero_mesa: Option<i32>,
+    pub capacidad: Option<i32>,
+    pub ubicacion: Option<String>,
+}
